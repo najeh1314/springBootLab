@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    table, th, td {
+        border: 1px solid white;
+        border-collapse: collapse;
+    }
+    th, td {
+        background-color: #96D4D4;
+    }
+    .label{
+        display: inline;
+    }
+</style>
+<body>
+<h1>Add new message:</h1>
+<form action="#" th:action="@{/message}" th:object="${newMessage}" th:method="POST">
+    <p class="label">Author:</p>
+    <input type="text" th:field="*{author}">
+    <p class="label">Message:</p>
+    <input type="text" th:field="*{message}">
+    <input type ="submit" value="Save">
+</form>
+<h1>Messages:</h1>
+<table style="width:100%">
+    <tr>
+        <th>Author</th>
+        <th style="width:70%">Message</th>
+        <th>Date</th>
+    </tr>
+    <tr th:each="msg: ${msgeList}">
+        <td th:text="${msg.getAuthor()}"></td>
+        <td th:text="${msg.getMessage()}"></td>
+        <td th:text="${msg.getStampDate()}"></td>
+    </tr>
+</table>
+</body>
+</html>
