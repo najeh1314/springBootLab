@@ -1,28 +1,38 @@
 package com.nc.webapp.mdel;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Message {
+@Entity
+public class Message implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String author;
     private LocalDateTime stampDate;
-    private String message;
+    private String comment;
 
-    public Message() {
-        this.stampDate = LocalDateTime.now();
-    }
+    // Constructeurs, getters, setters
+    public Message() {}
 
-    public Message(String author, String message) {
-        this.stampDate = LocalDateTime.now();
+    public Message(String author, String message, LocalDateTime stampDate) {
         this.author = author;
-        this.message = message;
-    }
-
-    public LocalDateTime getStampDate() {
-        return stampDate;
-    }
-
-    public void setStampDate(LocalDateTime stampDate) {
         this.stampDate = stampDate;
+        this.comment = message;
+    }
+
+    // Getters et setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getAuthor() {
@@ -33,11 +43,19 @@ public class Message {
         this.author = author;
     }
 
+    public LocalDateTime getStampDate() {
+        return stampDate;
+    }
+
+    public void setStampDate(LocalDateTime stampDate) {
+        this.stampDate = stampDate;
+    }
+
     public String getMessage() {
-        return message;
+        return comment;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.comment = message;
     }
 }
